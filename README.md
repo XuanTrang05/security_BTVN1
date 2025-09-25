@@ -33,7 +33,7 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 #
 #
 #
-## HOÁN VỊ - PẺMUTATION/ COLUMNAR TRANSPOSTION ( MÃ HÓA VỊ CỘT)
+## HOÁN VỊ - PERMUTATION/ COLUMNAR TRANSPOSTION ( MÃ HÓA VỊ CỘT)
 - Columnar Transposition (một dạng hoán vị phổ biến: sắp xếp theo key cột), và một dạng đơn giản là hoán vị vị trí cố định.
 # Tên gọi
 - Columnar Transposition (mã hoán vị cột)
