@@ -11,11 +11,10 @@
 ## Cách phá (không cần khóa)
 Brute force: thử tất cả 26 dịch chuyển.
 Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sánh tần suất chữ trong bản mã với phân bố tiếng Anh.
-
-#
-#
-#
-#
+## C++
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/585be5d7-be73-470a-82e3-540ffcaca2d4" />
+## HTML
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/67441b5e-fbf6-42d2-a6f7-12b518bc3a8c" />
 ## AFFINE CIPHER
 # Tên gọi
 - Affine cipher — hàm affine trên modulo 26: E(x) = (a*x + b) mod 26
@@ -28,6 +27,7 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 - Cách phá (không cần khóa)
 - Brute force trên 312 khóa — nhanh.
 - Nếu văn bản dài: phân tích tần suất, đoán ánh xạ của hai chữ thường gặp (E,T) → suy ra a,b.
+# C++
 
 #
 #
