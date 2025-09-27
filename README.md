@@ -41,7 +41,8 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 - Cách phá (không cần khóa)
 - Brute force trên 312 khóa — nhanh.
 - Nếu văn bản dài: phân tích tần suất, đoán ánh xạ của hai chữ thường gặp (E,T) → suy ra a,b.
-## C++
+## KẾT QUẢ
+* C++
 <img width="1916" height="1077" alt="image" src="https://github.com/user-attachments/assets/8e9ebd95-4290-49ae-9fe5-329eb59723a8" />
 ## HTML
 <img width="744" height="651" alt="image" src="https://github.com/user-attachments/assets/298a67da-f66b-4cde-9793-cf4d0a0659cb" />
