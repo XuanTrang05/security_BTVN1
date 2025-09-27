@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mã hóa Affine</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        padding: 20px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 20px auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      h2 {
+        margin-top: 0;
+        color: #2563eb;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+      }
+      textarea,
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+      button {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1e4fc4;
+      }
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f9fafb;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-height: 50px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Mã hóa Affine</h2>
+      <label>Văn bản</label>
+      <textarea id="affineText" placeholder="Nhập văn bản..."></textarea>
+
+      <label>Khóa a (nguyên tố cùng nhau với 26)</label>
+      <input type="number" id="affineA" value="5" />
+
+      <label>Khóa b</label>
+      <input type="number" id="affineB" value="8" />
+
+      <label>Chế độ</label>
+      <select id="affineMode">
+        <option value="enc">Mã hóa</option>
+        <option value="dec">Giải mã</option>
+      </select>
+
+      <button onclick="runAffine()">Thực hiện</button>
+      <div id="affineResult" class="result"></div>
+    </div>
+
+    <script>
+      // Hàm gcd để kiểm tra a và 26 có nguyên tố cùng nhau không
+      function gcd(a, b) {
+        return b == 0 ? a : gcd(b, a % b);
+      }
+
+      // Hàm tìm nghịch đảo modulo
+      function modInverse(a, m) {
+        a = a % m;
+        for (let x = 1; x < m; x++) {
+          if ((a * x) % m == 1) return x;
+        }
+        return null;
+      }
+
+      // Chuẩn hóa: lấy chữ cái A-Z
+      function onlyLetters(s) {
+        return s.toUpperCase().replace(/[^A-Z]/g, "");
+      }
+
+      // Mã hóa Affine: E(x) = (a*x + b) mod 26
+      function affineEncrypt(pt, a, b) {
+        pt = onlyLetters(pt);
+        return pt
+          .split("")
+          .map((ch) => {
+            let x = ch.charCodeAt(0) - 65;
+            let y = (a * x + b) % 26;
+            return String.fromCharCode(y + 65);
+          })
+          .join("");
+      }
+
+      // Giải mã Affine: D(y) = a⁻¹*(y - b) mod 26
+      function affineDecrypt(ct, a, b) {
+        ct = onlyLetters(ct);
+        let a_inv = modInverse(a, 26);
+        if (a_inv === null) return "Lỗi: a không có nghịch đảo modulo 26!";
+        return ct
+          .split("")
+          .map((ch) => {
+            let y = ch.charCodeAt(0) - 65;
+            let x = (a_inv * (y - b + 26)) % 26;
+            return String.fromCharCode(x + 65);
+          })
+          .join("");
+      }
+
+      // Thực thi
+      function runAffine() {
+        let txt = document.getElementById("affineText").value;
+        let a = parseInt(document.getElementById("affineA").value);
+        let b = parseInt(document.getElementById("affineB").value);
+        let mode = document.getElementById("affineMode").value;
+        if (gcd(a, 26) != 1) {
+          document.getElementById("affineResult").innerText =
+            "Lỗi: a phải nguyên tố cùng nhau với 26!";
+          return;
+        }
+        let result =
+          mode == "enc" ? affineEncrypt(txt, a, b) : affineDecrypt(txt, a, b);
+        document.getElementById("affineResult").innerText = result;
+      }
+    </script>
+  </body>
+</html>

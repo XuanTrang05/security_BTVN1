@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mã hóa Hoán vị (Columnar Transposition)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        padding: 20px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 20px auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      h2 {
+        margin-top: 0;
+        color: #2563eb;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+      }
+      textarea,
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+      button {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1e4fc4;
+      }
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f9fafb;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-height: 50px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Mã hóa Hoán vị (Columnar Transposition)</h2>
+      <label>Văn bản</label>
+      <textarea id="permText"></textarea>
+
+      <label>Khóa (chuỗi ký tự, ví dụ: "KEY")</label>
+      <input type="text" id="permKey" value="KEY" />
+
+      <label>Chế độ</label>
+      <select id="permMode">
+        <option value="enc">Mã hóa</option>
+        <option value="dec">Giải mã</option>
+      </select>
+
+      <button onclick="runPermutation()">Thực hiện</button>
+      <div id="permResult" class="result"></div>
+    </div>
+
+    <script>
+      // Hàm mã hóa
+      function encryptPermutation(text, key) {
+        let col = key.length;
+        let row = Math.ceil(text.length / col);
+        let table = Array.from({ length: row }, () => Array(col).fill("X"));
+        let k = 0;
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < col; j++) {
+            if (k < text.length) table[i][j] = text[k++];
+          }
+        }
+        let order = [...key].map((ch, i) => [ch, i]).sort();
+        let cipher = "";
+        for (let [_, j] of order) {
+          for (let i = 0; i < row; i++) cipher += table[i][j];
+        }
+        return cipher;
+      }
+
+      // Hàm giải mã
+      function decryptPermutation(cipher, key) {
+        let col = key.length;
+        let row = Math.ceil(cipher.length / col);
+        let order = [...key].map((ch, i) => [ch, i]).sort();
+        let table = Array.from({ length: row }, () => Array(col).fill(""));
+        let k = 0;
+        for (let [_, j] of order) {
+          for (let i = 0; i < row; i++) {
+            if (k < cipher.length) table[i][j] = cipher[k++];
+          }
+        }
+        let plain = "";
+        for (let i = 0; i < row; i++) {
+          for (let j = 0; j < col; j++) {
+            if (table[i][j] !== "X") plain += table[i][j];
+          }
+        }
+        return plain;
+      }
+
+      function runPermutation() {
+        let txt = document.getElementById("permText").value;
+        let key = document.getElementById("permKey").value;
+        let mode = document.getElementById("permMode").value;
+        let result =
+          mode == "enc"
+            ? encryptPermutation(txt, key)
+            : decryptPermutation(txt, key);
+        document.getElementById("permResult").innerText = result;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mã hóa Vigenère Cipher</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        padding: 20px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 20px auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      h2 {
+        margin-top: 0;
+        color: #2563eb;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+      }
+      textarea,
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+      button {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1e4fc4;
+      }
+      .result {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f9fafb;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-height: 50px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Mã hóa Vigenère Cipher</h2>
+      <label>Văn bản</label>
+      <textarea id="vigText"></textarea>
+
+      <label>Khóa (chuỗi ký tự)</label>
+      <input type="text" id="vigKey" value="KEY" />
+
+      <label>Chế độ</label>
+      <select id="vigMode">
+        <option value="enc">Mã hóa</option>
+        <option value="dec">Giải mã</option>
+      </select>
+
+      <button onclick="runVigenere()">Thực hiện</button>
+      <div id="vigResult" class="result"></div>
+    </div>
+
+    <script>
+      // Sinh khóa đầy đủ
+      function generateKey(text, key) {
+        let res = "",
+          j = 0;
+        key = key.toUpperCase();
+        for (let i = 0; i < text.length; i++) {
+          if (/[A-Z]/i.test(text[i])) {
+            res += key[j % key.length];
+            j++;
+          } else {
+            res += text[i];
+          }
+        }
+        return res;
+      }
+
+      // Mã hóa
+      function encryptVigenere(text, key) {
+        text = text.toUpperCase();
+        key = generateKey(text, key);
+        let result = "";
+        for (let i = 0; i < text.length; i++) {
+          if (/[A-Z]/.test(text[i])) {
+            let c = (text.charCodeAt(i) - 65 + (key.charCodeAt(i) - 65)) % 26;
+            result += String.fromCharCode(c + 65);
+          } else {
+            result += text[i];
+          }
+        }
+        return result;
+      }
+
+      // Giải mã
+      function decryptVigenere(cipher, key) {
+        cipher = cipher.toUpperCase();
+        key = generateKey(cipher, key);
+        let result = "";
+        for (let i = 0; i < cipher.length; i++) {
+          if (/[A-Z]/.test(cipher[i])) {
+            let p =
+              (cipher.charCodeAt(i) - 65 - (key.charCodeAt(i) - 65) + 26) % 26;
+            result += String.fromCharCode(p + 65);
+          } else {
+            result += cipher[i];
+          }
+        }
+        return result;
+      }
+
+      function runVigenere() {
+        let txt = document.getElementById("vigText").value;
+        let key = document.getElementById("vigKey").value;
+        let mode = document.getElementById("vigMode").value;
+        let result =
+          mode == "enc" ? encryptVigenere(txt, key) : decryptVigenere(txt, key);
+        document.getElementById("vigResult").innerText = result;
+      }
+    </script>
+  </body>
+</html>

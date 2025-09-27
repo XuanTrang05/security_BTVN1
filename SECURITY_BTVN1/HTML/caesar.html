@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mã hóa Caesar</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        padding: 20px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 500px;
+        margin: auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      h2 {
+        margin-top: 0;
+        color: #333;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+      }
+      textarea,
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+      button {
+        margin-top: 12px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: white;
+        font-size: 15px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1e4fc4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>Mã hóa Caesar</h2>
+
+      <label for="text">Văn bản</label>
+      <textarea
+        id="text"
+        placeholder="Nhập văn bản cần mã hóa hoặc giải mã..."
+      ></textarea>
+
+      <label for="shift">Khóa k (0 - 25)</label>
+      <input type="number" id="shift" value="3" min="0" max="25" />
+
+      <label for="mode">Chế độ</label>
+      <select id="mode">
+        <option value="enc">Mã hóa</option>
+        <option value="dec">Giải mã</option>
+      </select>
+
+      <button onclick="runCaesar()">Thực hiện</button>
+
+      <label for="result">Kết quả</label>
+      <textarea id="result" readonly></textarea>
+    </div>
+
+    <script>
+      // Chỉ lấy chữ cái, chuyển sang chữ in hoa
+      function chiLayChuInHoa(s) {
+        return s.toUpperCase().replace(/[^A-Z]/g, "");
+      }
+
+      // Hàm mã hóa Caesar
+      function caesarMaHoa(pt, k) {
+        pt = chiLayChuInHoa(pt);
+        return pt
+          .split("")
+          .map((c) =>
+            String.fromCharCode(((c.charCodeAt(0) - 65 + k) % 26) + 65)
+          )
+          .join("");
+      }
+
+      // Hàm giải mã Caesar
+      function caesarGiaiMa(ct, k) {
+        return caesarMaHoa(ct, (26 - k) % 26);
+      }
+
+      // Chạy khi nhấn nút
+      function runCaesar() {
+        let txt = document.getElementById("text").value;
+        let k = parseInt(document.getElementById("shift").value);
+        let mode = document.getElementById("mode").value;
+        let ketqua = mode == "enc" ? caesarMaHoa(txt, k) : caesarGiaiMa(txt, k);
+        document.getElementById("result").value = ketqua;
+      }
+    </script>
+  </body>
+</html>
