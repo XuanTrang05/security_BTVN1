@@ -13,7 +13,7 @@ Brute force: thử tất cả 26 dịch chuyển.
 Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sánh tần suất chữ trong bản mã với phân bố tiếng Anh.
 ## C++
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/585be5d7-be73-470a-82e3-540ffcaca2d4" />
-## HTML
+##  HTML
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/67441b5e-fbf6-42d2-a6f7-12b518bc3a8c" />
 ## AFFINE CIPHER
 # Tên gọi
@@ -27,12 +27,10 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 - Cách phá (không cần khóa)
 - Brute force trên 312 khóa — nhanh.
 - Nếu văn bản dài: phân tích tần suất, đoán ánh xạ của hai chữ thường gặp (E,T) → suy ra a,b.
-# C++
-
-#
-#
-#
-#
+## C++
+<img width="1916" height="1077" alt="image" src="https://github.com/user-attachments/assets/8e9ebd95-4290-49ae-9fe5-329eb59723a8" />
+## HTML
+<img width="744" height="651" alt="image" src="https://github.com/user-attachments/assets/298a67da-f66b-4cde-9793-cf4d0a0659cb" />
 ## HOÁN VỊ - PERMUTATION/ COLUMNAR TRANSPOSTION ( MÃ HÓA VỊ CỘT)
 - Columnar Transposition (một dạng hoán vị phổ biến: sắp xếp theo key cột), và một dạng đơn giản là hoán vị vị trí cố định.
 # Tên gọi
@@ -49,13 +47,10 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 ## Cách phá (không cần khóa)
 - Nếu biết plaintext bao gồm từ ngữ tự nhiên, dùng phân tích cấu trúc: tìm số cột hợp lý (thử nhiều n) và kiểm tra độ giống tiếng (dictionary scoring).
 - Kết hợp brute force trên hoán vị nhỏ; hoặc sử dụng tần suất bigram/trigram để đánh giá khả năng plaintext.
-
-#
-#
-#
-#
-#
-#
+## C++
+<img width="1917" height="1077" alt="image" src="https://github.com/user-attachments/assets/ac20370f-edb5-4feb-9a59-f73106b33d2e" />
+## HTML
+<img width="759" height="584" alt="image" src="https://github.com/user-attachments/assets/b6632a72-c999-4109-b33f-c8204dcadd7c" />
 ## VIGENÈRE CIPHER
 # Tên gọi
 - Vigenère cipher — một cipher dạng polyalphabetic, dùng key chữ để thay đổi dịch chuyển theo từng vị trí.
@@ -70,14 +65,10 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 - Kasiski examination (tìm khoảng cách giữa các chuỗi lặp trong ciphertext để đo chiều dài key).
 - Friedman test (đánh giá chỉ số trùng lặp để ước lượng key length).
 - Sau khi biết key length m, tách ciphertext thành m chuỗi và dùng frequency analysis trên mỗi chuỗi (vì mỗi chuỗi thực chất là Caesar cipher). Sau đó thu được key.
-#
-#
-#
-#
-#
-#
-#
-#
+## C++
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f575bdf4-62e9-422c-aba5-360af0bb819f" />
+## HTML
+<img width="749" height="600" alt="image" src="https://github.com/user-attachments/assets/c10e813b-bc7f-418b-b3ab-3f132909c869" />
 ## PLAYFAIR CIPHER
 ## Tên gọi
 - Playfair cipher (sử dụng bảng 5×5) — mã hoá theo cặp chữ (digraphs).
@@ -97,3 +88,7 @@ Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sán
 ## Cách phá (không cần khóa)
 - Tấn công thống kê digraphs (bigrams) — Playfair phá cấu trúc tần suất digraphs, dùng thuật toán tối ưu (simulated annealing, hill-climbing) + scoring (log-likelihood dựa trên ngữ liệu).
 - Với ciphertext dài, các kỹ thuật heuristic có thể phục hồi bảng.
+## C++
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/66db5ed4-fd23-456b-9a55-e7b1ef3f6d76" />
+## HTML
+<img width="766" height="590" alt="image" src="https://github.com/user-attachments/assets/ff002ada-b6d3-424a-8484-a56004a4ddc8" />
