@@ -25,7 +25,8 @@
 ## Cách phá (không cần khóa)
 Brute force: thử tất cả 26 dịch chuyển.
 Nếu văn bản dài: tấn công tần suất (frequency analysis) — so sánh tần suất chữ trong bản mã với phân bố tiếng Anh.
-## C++
+## KẾT QUẢ
+* C++
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/585be5d7-be73-470a-82e3-540ffcaca2d4" />
 ##  HTML
 <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/67441b5e-fbf6-42d2-a6f7-12b518bc3a8c" />
